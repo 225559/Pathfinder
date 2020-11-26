@@ -1,15 +1,15 @@
 ﻿using System;
 
-public class CustomCell : PathCell
+public class TilemapCell : Cell
 {
-    public CustomCell(int x, int y, int z)
+    public TilemapCell(int x, int y, int z)
     {
         X = x;
         Y = y;
         Z = z;
     }
 
-    public override bool Equals(PathCell other)
+    public override bool Equals(Cell other)
     {
         if (other == null)
         {

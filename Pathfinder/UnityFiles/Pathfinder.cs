@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 public static class Pathfinder
 {
-    public static List<PathCell> GetPath(IPathGrid grid, PathCell start, PathCell target)
+    public static List<Cell> GetWalkablePath(IGrid grid, Cell start, Cell target)
     {
-        List<PathCell> path = new List<PathCell>();
-        List<PathCell> openSet = new List<PathCell>();
-        List<PathCell> closedSet = new List<PathCell>();
+        List<Cell> path = new List<Cell>();
+        List<Cell> openSet = new List<Cell>();
+        List<Cell> closedSet = new List<Cell>();
 
         start.G = 0;
         start.H = grid.GetDistanceBetween(start, target);
@@ -17,7 +17,7 @@ public static class Pathfinder
 
         while (openSet.Count > 0)
         {
-            PathCell current = openSet[0];
+            Cell current = openSet[0];
             current = LowestFScore(current, openSet);
             
             if (current.Equals(target))
@@ -28,7 +28,7 @@ public static class Pathfinder
             openSet.Remove(current);
             closedSet.Add(current);
 
-            foreach (PathCell neighbor in grid.GetNeighbors(current))
+            foreach (Cell neighbor in grid.GetNeighbors(current))
             {
                 if (closedSet.Contains(neighbor) || !grid.IsWalkable(neighbor))
                 {
@@ -53,7 +53,7 @@ public static class Pathfinder
         return path;
     }
 
-    private static PathCell LowestFScore(PathCell current, List<PathCell> set)
+    private static Cell LowestFScore(Cell current, List<Cell> set)
     {
         foreach (var candidate in set)
         {
@@ -66,9 +66,9 @@ public static class Pathfinder
         return current;
     }
 
-    private static List<PathCell> ReconstructPath(PathCell cell)
+    private static List<Cell> ReconstructPath(Cell cell)
     {
-        List<PathCell> path = new List<PathCell>() { cell };
+        List<Cell> path = new List<Cell>() { cell };
 
         while (cell.Parent != null)
         {

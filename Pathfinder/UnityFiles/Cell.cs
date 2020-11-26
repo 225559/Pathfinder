@@ -1,6 +1,6 @@
 ﻿using System;
 
-public abstract class PathCell : IEquatable<PathCell>
+public abstract class Cell : IEquatable<Cell>
 {
     #region Properties
     public int X { get; set; } = 0;
@@ -11,10 +11,10 @@ public abstract class PathCell : IEquatable<PathCell>
     public uint G { get; set; } = uint.MaxValue;
     public uint H { get; set; } = uint.MaxValue;
 
-    public PathCell Parent { get; set; } = null;
+    public Cell Parent { get; set; } = null;
     #endregion
 
     #region Abstract methods
-    public abstract bool Equals(PathCell other);
+    public abstract bool Equals(Cell other);
     #endregion
 }
